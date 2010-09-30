@@ -53,9 +53,9 @@ cdef class Encoder:
         eclevel = options.get('eclevel')
         case_sensitive = options.get('case_sensitive')
         
-        p = text
-        p = p + '\0'
-        _c_code = QRcode_encodeString(p, int(v), _c_level, _c_hint, int(case_sensitive))
+        str_copy = text
+        str_copy = str_copy + '\0'
+        _c_code = QRcode_encodeString(str_copy, int(v), _c_level, _c_hint, int(case_sensitive))
         
         version = _c_code.version
         width = _c_code.width
