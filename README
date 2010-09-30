@@ -1,0 +1,30 @@
+Python bindings for the libqrencode (http://fukuchi.org/works/qrencode/index.en.html) using Cython
+
+
+Credit and inspiration to:
+ - http://pyqrcode.sourceforge.net/
+ (without all the Java dependencies)
+ 
+ - libqrencode, by Fukuchi Kentaro
+ http://megaui.net/fukuchi/works/qrencode/index.en.html
+
+ - PyQrCodec, by Stefano Pedemonte
+ http://www.pedemonte.eu/pyqr/index.py/pyqrhome
+
+
+Tested on:
+ * Mac OSX 10.6.4 Snow Leopard, Python 2.6.1 (64-bit)
+ * CentOS 5.5, Python 2.6.4 (64-bit)
+
+
+Pre-requisites on all platforms:
+--------------------------------
+ * you need Cython (tested with 0.13, $ easy_install cython)
+ * you need libqrencode somewhere in your LD path (/usr/local/lib)
+ * you need qrencode.h somewhere on your include path (/usr/local/include)
+
+
+Installation
+------------
+$ python setup.py install
+
