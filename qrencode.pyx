@@ -14,23 +14,26 @@ cdef extern from "qrencode.h":
     int QR_MODE_8
     int QR_MODE_KANJI
     
-    struct QRcode:
+    ctypedef struct QRcode:
         int version
         int width
-        char *data
+        unsigned char *data
     
     QRcode *QRcode_encodeString(char *string, int version, int level, int hint, int casesensitive)
 
 
 cdef class Encoder:
+    default_options = {
+        'mode' : QR_MODE_AN,
+        'eclevel': QR_ECLEVEL_L,
+        'width': 400,
+        'border': 10,
+        'version': 5,
+        'case_sensitive': True
+    }
+    
     def __cinit__(self):
-        __sd = lambda x: classobj('', (), x)
-        self.mode = __sd(dict(NUMERIC=0, ALNUM=1, BINARY=2, KANJI=3))
-        self.eclevel = __sd(dict(L=0, M=1, Q=2, H=3))
-        self.width = 400
-        self.border = 10
-        self.version = 5
-        self.case_sensitive = True
+        pass
     
     def __dealloc__(self):
         pass
@@ -39,13 +42,16 @@ cdef class Encoder:
         cdef QRcode *_c_code
         cdef int _c_level = QR_ECLEVEL_L
         cdef int _c_hint = QR_MODE_8
+        cdef unsigned char *data
         
-        border = options.get('border', self.border)
-        w = options.get('width', self.width) - border * 2
-        v = options.get('version', self.version)
-        mode = options.get('mode', self.mode.ALNUM)
-        eclevel = options.get('eclevel', self.eclevel.L)
-        case_sensitive = options.get('case_sensitive', self.case_sensitive)
+        options.update(self.default_options)
+        
+        border = options.get('border')
+        w = options.get('width') - border * 2
+        v = options.get('version')
+        mode = options.get('mode')
+        eclevel = options.get('eclevel')
+        case_sensitive = options.get('case_sensitive')
         
         p = text
         p = p + '\0'
@@ -62,7 +68,7 @@ cdef class Encoder:
         for y in range(width):
             line = ''
             for x in range(width):
-                if ord(data[y*width+x]) % 2:
+                if data[y*width+x] % 2:
                     line += dotsize * chr(0)
                 else:
                     line += dotsize * chr(255)
