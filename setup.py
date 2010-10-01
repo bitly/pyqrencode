@@ -13,7 +13,7 @@ parser.add_option("", "--regenerate", action='store_true', dest='cython',
                   help='regenerate C source via Cython (requires Cython > 0.13)')
 (options, args) = parser.parse_args()
 
-# remove our options from argv to distutils doesn't barf
+# remove our options from argv so distutils doesn't barf
 for i, a in enumerate(sys.argv):
     if a == '--regenerate':
         sys.argv.pop(i)
