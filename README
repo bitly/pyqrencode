@@ -1,9 +1,9 @@
-Python bindings for the libqrencode (http://fukuchi.org/works/qrencode/index.en.html) using Cython
+Python bindings for libqrencode (http://fukuchi.org/works/qrencode/index.en.html) using Cython
 
 
 Credit and inspiration to:
  - http://pyqrcode.sourceforge.net/
- (without all the Java dependencies)
+ (this is essentially a cleaned up version of the Encoder, eliminating all the Java dependencies)
  
  - libqrencode, by Fukuchi Kentaro
  http://megaui.net/fukuchi/works/qrencode/index.en.html
