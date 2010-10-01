@@ -41,14 +41,15 @@ cdef class Encoder:
         cdef QRcode *_c_code
         cdef unsigned char *data
         
-        options.update(self.default_options)
+        opt = self.default_options
+        opt.update(options)
         
-        border = options.get('border')
-        w = options.get('width') - border * 2
-        v = options.get('version')
-        mode = options.get('mode')
-        ec_level = options.get('ec_level')
-        case_sensitive = options.get('case_sensitive')
+        border = opt.get('border')
+        w = opt.get('width') - (border * 2)
+        v = opt.get('version')
+        mode = opt.get('mode')
+        ec_level = opt.get('ec_level')
+        case_sensitive = opt.get('case_sensitive')
        
         # encode the test as a QR code
         str_copy = text
