@@ -1,4 +1,3 @@
-from new import classobj
 from ImageOps import expand
 from Image import fromstring
 
@@ -50,11 +49,11 @@ cdef class Encoder:
         mode = options.get('mode')
         ec_level = options.get('ec_level')
         case_sensitive = options.get('case_sensitive')
-        
+       
+        # encode the test as a QR code
         str_copy = text
         str_copy = str_copy + '\0'
         _c_code = QRcode_encodeString(str_copy, int(v), int(ec_level), int(mode), int(case_sensitive))
-        
         version = _c_code.version
         width = _c_code.width
         data = _c_code.data
@@ -63,6 +62,7 @@ cdef class Encoder:
         dotsize = w / width
         realwidth = width * dotsize
         
+        # build raw image data
         for y in range(width):
             line = ''
             for x in range(width):
@@ -73,6 +73,7 @@ cdef class Encoder:
             lines = dotsize * line
             rawdata += lines
         
-        image = fromstring('L', (realwidth, realwidth), rawdata)
+        # create PIL image w/ border
+        image = expand(fromstring('L', (realwidth, realwidth), rawdata), border, 255)
         
-        return expand(image, border, 255)
+        return image
