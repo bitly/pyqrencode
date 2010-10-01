@@ -22,7 +22,9 @@ Pre-requisites on all platforms:
  * you need libqrencode somewhere in your LD path (/usr/local/lib)
  * you need qrencode.h somewhere on your include path (/usr/local/include)
  
- ** if you want to play with the code generation you need Cython (tested with 0.13, $ easy_install cython)
+ ** if you want to play with the code generation you need Cython (tested with 0.13)
+     $ easy_install cython
+     $ python setup.py build_ext --regenerate
 
 
 Installation
