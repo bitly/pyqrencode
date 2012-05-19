@@ -15,7 +15,7 @@ Credit and inspiration to:
 Tested on:
  * Mac OSX 10.6.4 Snow Leopard, Python 2.6.1 (64-bit)
  * CentOS 5.5, Python 2.6.4 (64-bit)
-
+ * Ubuntu Precise Pangolin 10.12, Python 2.7.3 (64-bit) (depends on package libqrencode-dev)
 
 Pre-requisites on all platforms:
 --------------------------------
