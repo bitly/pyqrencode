@@ -1,6 +1,9 @@
-from ImageOps import expand
-from Image import fromstring
-
+try:
+    from ImageOps import expand
+    from Image import fromstring
+except ImportError:
+    from PIL.ImageOps import expand
+    from PIL.Image import fromstring
 
 cdef extern from "qrencode.h":
     int QR_ECLEVEL_L
