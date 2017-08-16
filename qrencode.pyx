@@ -1,5 +1,5 @@
-from ImageOps import expand
-from Image import fromstring
+from PIL.ImageOps import expand
+from PIL.Image import frombytes
 
 
 cdef extern from "qrencode.h":
@@ -75,6 +75,6 @@ cdef class Encoder:
             rawdata += lines
         
         # create PIL image w/ border
-        image = expand(fromstring('L', (realwidth, realwidth), rawdata), border, 255)
+        image = expand(frombytes('L', (realwidth, realwidth), rawdata), border, 255)
         
         return image
